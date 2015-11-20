@@ -46,6 +46,8 @@
             Pose = new Pose((int)(_pos[0] * RobotControl.MapZoom), (int)(_pos[1] * RobotControl.MapZoom), 180.0 * _ori[0] / Math.PI);
         }
 
+        public Pose GetKinetPose() { }
+
         private void OnPoseChanged()
         {
             if (PoseChanged != null)
