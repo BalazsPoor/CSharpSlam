@@ -1,15 +1,26 @@
-﻿namespace CSharpSlam
-{
-    using System;
+﻿    using System;
     using System.Threading;
     using remoteApiNETWrapper;
-    using R = Properties.Resources;
+    using R = CSharpSlam.Properties.Resources;
 
+namespace CSharpSlam
+{
     internal class Localization
     {
         private Pose _pose;
+
+        // V-REP
         private float[] _pos = new float[3];
         private float[] _ori = new float[3];
+
+        // kinematic model
+        //  previous values
+        private Pose _prevPose = new Pose(0, 0, 0);
+        private float[] _prevWheelPositions= new float[2] {0, 0};
+        private float _prevTime = 0;
+        //  constants - must be corrected !!
+        private const float l = 0.5f;
+        private const float radius = 0.2f; //needed?
 
         public event EventHandler PoseChanged;
 
@@ -45,8 +56,23 @@
 
             Pose = new Pose((int)(_pos[0] * RobotControl.MapZoom), (int)(_pos[1] * RobotControl.MapZoom), 180.0 * _ori[0] / Math.PI);
         }
+        
+        public void CalculateSimpleKinematicPose() {
+            // értékek megdása
+            Pose pose = new Pose();
+            float[] wheelPositions = new float[2];
+            float time = 0;
+            
+            // sebesség kiszámítása
+            //  szögsebesség kisz.
 
-        public Pose GetKinetPose() { }
+            // pose kiszámítása
+
+            Pose = 1;
+            
+            // adatok mentése a következő számításhoz
+
+        }
 
         private void OnPoseChanged()
         {
