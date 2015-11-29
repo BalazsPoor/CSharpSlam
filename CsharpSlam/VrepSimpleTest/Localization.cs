@@ -14,7 +14,10 @@
         public event EventHandler PoseChanged;
 
         public int ClientId { private get; set; }
+
         public int HandleSick { private get; set; }
+
+        public int HandleRelative { private get; set; }
 
         public double[,] CurrentRawDatas { private get; set; }
         public Layers Layers { private get; set; }
@@ -33,10 +36,10 @@
             }
         }
 
-        public void CalculatePose()
+        public void GetPose()
         {
-            VREPWrapper.simxGetObjectPosition(ClientId, HandleSick, -1, _pos, simx_opmode.oneshot_wait);
-            VREPWrapper.simxGetObjectOrientation(ClientId, HandleSick, -1, _ori, simx_opmode.oneshot_wait);
+            VREPWrapper.simxGetObjectPosition(ClientId, HandleSick, HandleRelative, _pos, simx_opmode.oneshot_wait);
+            VREPWrapper.simxGetObjectOrientation(ClientId, HandleSick, HandleRelative, _ori, simx_opmode.oneshot_wait);
 
             //mysterious formula
             if (_ori[0] < 0)
